@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@500&family=Manrope:wght@400;600;700&display=swap');
+*{box-sizing:border-box;}
+body{
+  width:300px;margin:0;font-family:'Manrope',sans-serif;color:#1F2A24;background:#EDEFEA;
+}
+.wrap{padding:16px;}
+.brand{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.mark{width:22px;height:22px;border-radius:7px;background:#1F2A24;position:relative;}
+.mark::after{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;border-radius:50%;background:#C98A3D;transform:translate(-50%,-50%);}
+.title{font-family:'Fraunces',serif;font-size:1rem;}
+.desc{font-size:0.82rem;line-height:1.5;color:#5B6961;margin:0 0 12px;}
+.consent{display:flex;gap:8px;align-items:flex-start;font-size:0.76rem;color:#5B6961;margin-bottom:12px;}
+.consent input{margin-top:2px;}
+.btn{
+  width:100%;padding:10px;border:none;border-radius:999px;background:#1F2A24;color:#fff;
+  font-weight:700;font-size:0.85rem;cursor:pointer;
+}
+.btn:disabled{opacity:0.4;cursor:not-allowed;}
+.btn-ghost{background:#fff;color:#1F2A24;border:1px solid #DCE1D8;}
+.fine{font-size:0.7rem;color:#8B968E;margin-top:10px;}
+.stat-card{background:#fff;border-radius:12px;padding:14px;text-align:center;margin-bottom:12px;}
+.stat-num{font-family:'Fraunces',serif;font-size:1.8rem;color:#3E7C6B;}
+.stat-label{font-size:0.72rem;color:#5B6961;}
+.status{font-size:0.72rem;color:#B5533C;margin-top:10px;min-height:14px;}

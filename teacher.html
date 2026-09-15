@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POP-AI — Giáo viên</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jstat@1.9.6/dist/jstat.min.js"></script>
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><span></span></div>
+      <div class="brand-name">POP-AI</div>
+    </div>
+    <p class="tag">Không gian giáo viên</p>
+    <div class="sidebar-footer">
+      <div class="user-chip"><div class="user-dot" id="userInitial">?</div><span id="userName">Đang tải...</span></div>
+      <button class="btn btn-ghost btn-sm" id="logoutBtn">Đăng xuất</button>
+    </div>
+  </aside>
+
+  <main class="main" style="max-width:1080px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <h1>Lớp học của bạn</h1>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <select id="classSelect" style="padding:9px 12px;border-radius:8px;border:1px solid var(--line);"></select>
+        <button class="btn btn-ghost btn-sm" id="newClassBtn">+ Tạo lớp mới</button>
+      </div>
+    </div>
+
+    <div class="card section-gap" id="classCodeCard" style="display:none;">
+      <p class="muted">Mã tham gia lớp — chia sẻ với học sinh: <strong id="joinCodeDisplay" style="font-size:1.1rem;color:var(--focus);"></strong></p>
+    </div>
+
+    <div class="grid-2 section-gap" style="grid-template-columns:repeat(4,1fr);gap:12px;">
+      <div class="card"><div class="stat-num" style="font-family:'Fraunces',serif;font-size:1.7rem;" id="mTotal">0</div><div class="muted">Học sinh tham gia</div></div>
+      <div class="card"><div class="stat-num" style="font-family:'Fraunces',serif;font-size:1.7rem;" id="mAssessed">0</div><div class="muted">Đã tự đánh giá</div></div>
+      <div class="card"><div class="stat-num" style="font-family:'Fraunces',serif;font-size:1.7rem;" id="mJournalRate">0%</div><div class="muted">Hoàn thành nhật ký 7 ngày</div></div>
+      <div class="card"><div class="stat-num" style="font-family:'Fraunces',serif;font-size:1.7rem;" id="mAvgFocus">0</div><div class="muted">Phiên tập trung TB</div></div>
+    </div>
+
+    <div class="card section-gap">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h3>Đang diễn ra trong lớp (trực tiếp)</h3>
+        <span class="muted" style="font-size:0.78rem;">Tự cập nhật — không cần tải lại trang</span>
+      </div>
+      <p class="muted">Chỉ hiển thị nền tảng giải trí đang xem (nếu có) — không ghi lại địa chỉ các trang khác, để tôn trọng quyền riêng tư của học sinh.</p>
+      <div style="overflow-x:auto;" class="section-gap">
+        <table>
+          <thead><tr><th>Mã HS</th><th>Trạng thái</th><th>Cập nhật</th></tr></thead>
+          <tbody id="liveTableBody">
+            <tr><td colspan="3" class="empty-state">Chưa có dữ liệu trực tiếp — học sinh cần cài tiện ích và tham gia lớp.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card section-gap" id="statsCard">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <h3>Kiểm định hiệu quả can thiệp</h3>
+        <select id="outcomeSelect" style="padding:9px 12px;border-radius:8px;border:1px solid var(--line);">
+          <option value="shortVideo">Thời gian xem video ngắn (phút/ngày)</option>
+          <option value="assessment">Điểm tự đánh giá nguy cơ (0–50)</option>
+        </select>
+      </div>
+      <p class="muted">So sánh số liệu trước và sau can thiệp trên cùng một nhóm học sinh (dữ liệu ghép cặp). Giá trị dương ở cột "Thay đổi" nghĩa là đã giảm sau can thiệp.</p>
+
+      <div id="statsBody" class="section-gap">
+        <p class="empty-state">Chưa đủ dữ liệu để kiểm định.</p>
+      </div>
+    </div>
+
+    <div class="card section-gap">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h3>Theo dõi tiến trình học sinh</h3>
+        <button class="btn btn-accent btn-sm" id="exportBtn">Xuất dữ liệu (.xlsx)</button>
+      </div>
+      <p class="muted">Học sinh hiển thị theo mã, không hiển thị họ tên.</p>
+      <div style="overflow-x:auto;" class="section-gap">
+        <table>
+          <thead><tr>
+            <th>Mã HS</th><th>Mức nguy cơ</th><th>Video ngắn (đầu→hiện tại)</th>
+            <th>Tập trung (phiên)</th><th>Gián đoạn</th><th>Số ngày hoàn thành</th><th>Điểm cuối chương trình</th>
+          </tr></thead>
+          <tbody id="studentTableBody">
+            <tr><td colspan="7" class="empty-state">Chưa có học sinh nào trong lớp này.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module" src="js/teacher.js"></script>
+</body>
+</html>

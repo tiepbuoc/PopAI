@@ -1,0 +1,15 @@
+# Cloud Functions dependencies (cài lại bằng npm install, không cần commit)
+firebase/functions/node_modules/
+firebase/functions/.env
+firebase/functions/.env.*
+
+# Firebase CLI local cache/logs
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Hệ điều hành / editor
+.DS_Store
+Thumbs.db
+.vscode/

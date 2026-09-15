@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>POP-AI Tracker</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark"></div>
+      <div class="title">POP-AI Tracker</div>
+    </div>
+
+    <div id="loggedOutView">
+      <p class="desc">Tự động ghi nhận thời gian bạn xem video ngắn (YouTube Shorts, TikTok, Instagram Reels, Facebook Reels) trên trình duyệt này, để đồng bộ với hồ sơ POP-AI của bạn.</p>
+      <label class="consent">
+        <input type="checkbox" id="consentBox">
+        <span>Tôi đồng ý cho POP-AI Tracker ghi nhận thời gian tôi xem video ngắn trên trình duyệt này để phục vụ theo dõi cá nhân / nghiên cứu giáo dục.</span>
+      </label>
+      <button id="loginBtn" class="btn" disabled>Đăng nhập bằng Google</button>
+      <p class="fine">Bạn có thể tắt theo dõi bất cứ lúc nào bằng cách đăng xuất khỏi tiện ích này.</p>
+    </div>
+
+    <div id="loggedInView" style="display:none;">
+      <p class="desc">Đã kết nối với <strong id="accountEmail"></strong></p>
+      <div class="stat-card">
+        <div class="stat-num" id="todayMin">0</div>
+        <div class="stat-label">phút video ngắn hôm nay</div>
+      </div>
+      <button id="logoutBtn" class="btn btn-ghost">Đăng xuất / Ngừng theo dõi</button>
+    </div>
+
+    <div id="statusMsg" class="status"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

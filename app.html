@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>POP-AI</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<div class="app-shell">
+  <!-- Sidebar (desktop) -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><span></span></div>
+      <div class="brand-name">POP-AI</div>
+    </div>
+    <nav class="nav" id="sideNav">
+      <button class="nav-item active" data-page="today"><span class="nav-icon">◐</span> Hôm nay</button>
+      <button class="nav-item" data-page="prevent"><span class="nav-icon">○</span> Phòng ngừa</button>
+      <button class="nav-item" data-page="optimize"><span class="nav-icon">◑</span> Tối ưu hóa</button>
+      <button class="nav-item" data-page="perform"><span class="nav-icon">◒</span> Phát huy</button>
+      <button class="nav-item" data-page="assistant"><span class="nav-icon">✧</span> Trợ lý AI</button>
+      <button class="nav-item" data-page="settings"><span class="nav-icon">◍</span> Cài đặt</button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-chip"><div class="user-dot" id="userInitial">?</div><span id="userName">Đang tải...</span></div>
+      <button class="btn btn-ghost btn-sm" id="logoutBtn">Đăng xuất</button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+
+    <!-- ================= TODAY ================= -->
+    <section class="page active" id="page-today">
+      <div class="today-hero">
+        <div class="eyebrow" id="todayGreeting">Chào buổi sáng</div>
+        <h1 id="todayDay">Ngày 1 / 7</h1>
+        <div class="today-meta">
+          <div><div class="stat-num" id="statStreak">0</div><div class="stat-label">Chuỗi ngày liên tục</div></div>
+          <div><div class="stat-num" id="statShortVideo">0'</div><div class="stat-label">Video ngắn hôm nay</div></div>
+          <div><div class="stat-num" id="statFocusSessions">0</div><div class="stat-label">Phiên tập trung hôm nay</div></div>
+        </div>
+        <div class="today-actions">
+          <button class="btn btn-accent" data-goto="optimize">Bắt đầu phiên tập trung</button>
+          <button class="btn btn-ghost" style="background:transparent;color:#fff;border-color:rgba(255,255,255,0.35);" data-goto="perform">Ghi nhật ký hôm nay</button>
+        </div>
+      </div>
+
+      <div class="card adaptive-card" id="adaptiveGoalCard" style="display:none;">
+        <div class="eyebrow" id="adaptiveEyebrow">POP-AI đề xuất</div>
+        <h3 id="adaptiveTitle"></h3>
+        <p id="adaptiveBody"></p>
+        <div class="adaptive-evidence" id="adaptiveEvidence"></div>
+        <div class="adaptive-actions">
+          <button class="btn btn-accent btn-sm" id="adaptiveAcceptBtn">Đồng ý</button>
+          <button class="btn btn-ghost btn-sm" id="adaptiveKeepBtn">Giữ nguyên mục tiêu</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title">Mục tiêu hôm nay</h3>
+        <p id="goalSummary" class="muted">Bạn chưa lập kế hoạch. Vào mục <strong>Tối ưu hóa</strong> để tạo kế hoạch giảm lướt — tăng tập trung.</p>
+        <div class="section-gap">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:6px;">
+            <span class="muted">Tiến trình 7 ngày</span><span class="muted" id="weekProgressLabel">0/7 ngày</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="weekProgressFill" style="width:0%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PREVENT ================= -->
+    <section class="page" id="page-prevent">
+      <h1 class="section-title">Giai đoạn Phòng ngừa</h1>
+      <div class="role-toggle" id="preventTabs">
+        <button type="button" class="active" data-tab="lesson">Tìm hiểu Popcorn Brain</button>
+        <button type="button" data-tab="assess">Tự đánh giá nguy cơ</button>
+      </div>
+
+      <div class="card section-gap" id="tab-lesson">
+        <h3>Popcorn Brain là gì?</h3>
+        <p>Là trạng thái não bộ quen với nhịp độ kích thích nhanh, liên tục thay đổi từ video ngắn, khiến việc tập trung vào một việc lâu dài trở nên khó chịu.</p>
+        <div class="divider"></div>
+        <h3>Biểu hiện thường gặp</h3>
+        <p>Khó ngồi yên đọc một đoạn dài, muốn kiểm tra điện thoại liên tục, cảm thấy "buồn chán" khi không có kích thích mới.</p>
+        <div class="divider"></div>
+        <h3>Tác động đến học tập</h3>
+        <p>Giảm khả năng ghi nhớ sâu, dễ trì hoãn, mất nhiều thời gian hơn để quay lại tập trung sau mỗi lần gián đoạn.</p>
+        <div class="divider"></div>
+        <h3>Cách phòng tránh</h3>
+        <p>Đặt giới hạn thời gian rõ ràng, luyện tập các phiên tập trung ngắn dần tăng lên, và tạo khoảng thời gian không dùng điện thoại mỗi ngày.</p>
+        <button class="btn btn-primary section-gap" data-tab-switch="assess">Đã hiểu, làm bài tự đánh giá</button>
+      </div>
+
+      <div class="card section-gap" id="tab-assess" style="display:none;">
+        <p class="muted">Đây là công cụ tự đánh giá phục vụ giáo dục, <strong>không phải</strong> công cụ chẩn đoán y khoa hoặc tâm lý.</p>
+        <form id="assessForm" class="section-gap"></form>
+        <button class="btn btn-primary" id="submitAssessBtn">Xem kết quả</button>
+
+        <div class="section-gap" id="assessResult" style="display:none;">
+          <div class="divider"></div>
+          <h3>Kết quả</h3>
+          <p>Điểm tổng: <strong id="assessScore">0</strong>/50 — <span class="badge" id="assessBadge">—</span></p>
+          <p id="assessAdvice" class="muted"></p>
+          <button class="btn btn-accent" data-goto="optimize">Xây dựng kế hoạch</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= OPTIMIZE ================= -->
+    <section class="page" id="page-optimize">
+      <h1 class="section-title">Giai đoạn Tối ưu hóa</h1>
+      <div class="role-toggle" id="optimizeTabs">
+        <button type="button" class="active" data-tab="plan">Kế hoạch</button>
+        <button type="button" data-tab="timer">Đồng hồ tập trung</button>
+      </div>
+
+      <div class="card section-gap" id="tab-plan">
+        <h3 class="section-title">Kế hoạch "Giảm lướt — Tăng tập trung"</h3>
+        <div class="grid-2">
+          <div class="field"><label>Thời gian xem video ngắn hiện tại (phút/ngày)</label><input type="number" id="planCurrent" min="0"></div>
+          <div class="field"><label>Mức muốn giảm xuống còn (phút/ngày)</label><input type="number" id="planTarget" min="0"></div>
+          <div class="field"><label>Không dùng điện thoại — từ</label><input type="text" id="planPhoneStart" placeholder="19:30"></div>
+          <div class="field"><label>Không dùng điện thoại — đến</label><input type="text" id="planPhoneEnd" placeholder="20:30"></div>
+          <div class="field"><label>Thời lượng 1 phiên tập trung (phút)</label>
+            <select id="planSessionLen"><option>15</option><option selected>25</option><option>30</option></select>
+          </div>
+          <div class="field"><label>Số phiên tập trung mỗi ngày</label><input type="number" id="planSessionsPerDay" min="1" value="2"></div>
+        </div>
+        <div class="field"><label>Nhiệm vụ học tập quan trọng nhất hiện nay</label><input type="text" id="planTask" placeholder="VD: Ôn tập chương 3 môn Toán"></div>
+        <button class="btn btn-primary" id="savePlanBtn">Lưu kế hoạch</button>
+        <p class="muted section-gap">Mục tiêu có thể điều chỉnh bất cứ lúc nào — đừng đặt mục tiêu quá cao ngay từ đầu.</p>
+      </div>
+
+      <div class="card section-gap" id="tab-timer" style="display:none;">
+        <div class="checklist" style="margin-bottom:10px;">
+          <label><input type="checkbox"> Đã tắt thông báo</label>
+          <label><input type="checkbox"> Điện thoại để ngoài tầm tay</label>
+          <label><input type="checkbox"> Đã chuẩn bị đủ tài liệu</label>
+          <label><input type="checkbox"> Đã đóng ứng dụng không liên quan</label>
+        </div>
+        <div class="field"><label>Nhiệm vụ đang thực hiện</label><input type="text" id="timerTask" placeholder="VD: Đọc chương 2 Vật lý"></div>
+        <div class="duration-picker">
+          <button data-min="15">15'</button><button data-min="20">20'</button>
+          <button class="active" data-min="25">25'</button><button data-min="30">30'</button>
+        </div>
+        <div class="timer-wrap">
+          <div class="timer-display" id="timerDisplay">25:00</div>
+          <p class="muted" id="timerHint">Chỉ làm một việc trong phiên này.</p>
+          <div class="today-actions" style="justify-content:center;">
+            <button class="btn btn-accent" id="timerStartBtn">Bắt đầu</button>
+            <button class="btn btn-ghost" id="timerPauseBtn" disabled>Tạm dừng</button>
+            <button class="btn btn-ghost" id="timerResetBtn">Kết thúc</button>
+          </div>
+          <p class="muted section-gap">Phiên đã hoàn thành hôm nay: <strong id="timerCompletedCount">0</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PERFORM ================= -->
+    <section class="page" id="page-perform">
+      <h1 class="section-title">Giai đoạn Phát huy</h1>
+      <div class="role-toggle" id="performTabs">
+        <button type="button" class="active" data-tab="journal">Nhật ký hôm nay</button>
+        <button type="button" data-tab="report">Báo cáo tiến bộ</button>
+      </div>
+
+      <div class="card section-gap" id="tab-journal">
+        <div class="field"><label>Thời gian xem video ngắn hôm nay (phút)</label><input type="number" id="jShortVideo" min="0"></div>
+        <div class="field"><label>Số phiên tập trung đã hoàn thành</label><input type="number" id="jSessions" min="0"></div>
+        <div class="field"><label>Tổng thời gian tập trung (phút)</label><input type="number" id="jFocusMin" min="0"></div>
+        <div class="field"><label>Số lần bị gián đoạn</label><input type="number" id="jInterrupt" min="0"></div>
+        <div class="field"><label>Mức độ hoàn thành nhiệm vụ (1–5)</label><input type="number" id="jTaskDone" min="1" max="5"></div>
+        <div class="field"><label>Cảm nhận về khả năng tập trung (1–5)</label><input type="number" id="jFeeling" min="1" max="5"></div>
+        <div class="field"><label>Một điều đã làm tốt</label><input type="text" id="jGood"></div>
+        <div class="field"><label>Một điều cần điều chỉnh vào ngày mai</label><input type="text" id="jImprove"></div>
+        <button class="btn btn-primary" id="saveJournalBtn">Lưu nhật ký hôm nay</button>
+      </div>
+
+      <div class="card section-gap" id="tab-report" style="display:none;">
+        <div class="grid-2">
+          <div><canvas id="chartShortVideo" height="180"></canvas></div>
+          <div><canvas id="chartFocus" height="180"></canvas></div>
+        </div>
+        <div class="divider"></div>
+        <h3>Nhận xét dựa trên số liệu</h3>
+        <p id="reportFeedback" class="muted">Chưa đủ dữ liệu 7 ngày để đưa ra nhận xét.</p>
+      </div>
+    </section>
+
+    <!-- ================= ASSISTANT (AI THẬT) ================= -->
+    <section class="page" id="page-assistant">
+      <h1 class="section-title">Trợ lý POP-AI</h1>
+      <p class="muted">Trợ lý đọc kế hoạch, nhật ký và mức độ tập trung của riêng bạn để trả lời — không phải câu trả lời cố định.</p>
+      <div class="card section-gap chat-card">
+        <div id="chatMessages" class="chat-messages">
+          <div class="chat-msg assistant">
+            <span class="chat-label">Trợ lý POP-AI</span>
+            <div class="chat-bubble">Chào bạn! Mình đã xem qua kế hoạch và nhật ký gần đây của bạn. Bạn muốn hỏi gì về việc giảm lướt video ngắn hay tăng tập trung hôm nay?</div>
+          </div>
+        </div>
+        <div class="chat-inputbar">
+          <textarea id="chatInput" rows="1" placeholder="Hỏi trợ lý POP-AI..."></textarea>
+          <button class="btn btn-accent btn-sm" id="chatSendBtn">Gửi</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SETTINGS ================= -->
+    <section class="page" id="page-settings">
+      <h1 class="section-title">Cài đặt</h1>
+      <div class="card">
+        <h3>Tiện ích trình duyệt (theo dõi tự động)</h3>
+        <p class="muted">Trạng thái kết nối: <span id="trackerStatus" class="badge badge-mid">Chưa kết nối</span></p>
+        <p class="muted">Cài tiện ích POP-AI Tracker trên Chrome, đăng nhập bằng cùng tài khoản Google này và đồng ý điều khoản để dữ liệu thời gian xem video ngắn tự động đồng bộ vào mục "Hôm nay" và "Nhật ký".</p>
+      </div>
+      <div class="card section-gap">
+        <h3>Lớp học</h3>
+        <p class="muted" id="classInfo">Chưa tham gia lớp nào.</p>
+        <div class="field section-gap"><label>Nhập mã lớp</label><input type="text" id="joinClassCode" placeholder="VD: 7K2M9P"></div>
+        <button class="btn btn-ghost" id="joinClassBtn">Tham gia lớp</button>
+      </div>
+      <div class="card section-gap">
+        <h3>Mã học sinh của bạn</h3>
+        <p class="muted">Giáo viên nhìn thấy bạn qua mã này, không phải tên thật: <strong id="myStudentCode">—</strong></p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Bottom nav (mobile) -->
+<nav class="bottom-nav" id="bottomNav">
+  <button class="active" data-page="today"><span class="nav-icon">◐</span>Hôm nay</button>
+  <button data-page="prevent"><span class="nav-icon">○</span>Phòng ngừa</button>
+  <button data-page="optimize"><span class="nav-icon">◑</span>Tối ưu</button>
+  <button data-page="perform"><span class="nav-icon">◒</span>Phát huy</button>
+  <button data-page="assistant"><span class="nav-icon">✧</span>Trợ lý AI</button>
+  <button data-page="settings"><span class="nav-icon">◍</span>Cài đặt</button>
+</nav>
+
+<script type="module" src="js/student.js"></script>
+<script type="module" src="js/assistant.js"></script>
+</body>
+</html>
